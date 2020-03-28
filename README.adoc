@@ -1,0 +1,56 @@
+= NomorePoint
+
+NomorePoint is just the combination of several tools to make the job of creating slides in an easier way, using just your favorite text editor
+
+== Requirements
+
+*podman
+
+== Usage
+
+Build the container by running:
+
+```
+./install.sh
+```
+
+Then, start the server with:
+
+```
+./run.sh
+```
+
+If you want to stop the server, run:
+
+```
+./stop.sh
+```
+
+== Creating slides
+
+Just edit the file at ./src/slides.adoc, and watch your slides at http://localhost:8123
+
+
+== What is Nomorepoint
+
+This container has:
+
+=== ascidoctor-revealjs
+
+The tool which is used to generate slides from the adoc files
+
+=== Watchman
+
+Watches for changes in the adoc files, and triggers the building process of the slides
+
+=== LiveJS
+
+Performs a light polling to check if the html file is changed
+
+=== WEBrick
+
+Simple ruby http server to serve the html slides
+
+=== Websocketd
+
+Simple tool to create websocket servers using the stdin and stdout of the software
