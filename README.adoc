@@ -43,10 +43,6 @@ The tool which is used to generate slides from the adoc files
 
 Watches for changes in the adoc files, and triggers the building process of the slides
 
-=== LiveJS
-
-Performs a light polling to check if the html file is changed
-
 === WEBrick
 
 Simple ruby http server to serve the html slides
