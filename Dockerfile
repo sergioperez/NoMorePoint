@@ -1,4 +1,4 @@
-FROM centos:8
+FROM fedora:35
 ARG SLIDES_PORT=8123
 ARG STATUS_PORT=8124
 
@@ -6,17 +6,10 @@ ENV SLIDES_PORT=${SLIDES_PORT}
 ENV DISABLE_LIVE_RELOAD=${DISABLE_LIVE_RELOAD}
 ENV STATUS_PORT=${STATUS_PORT}
 
-RUN curl https://sergio.link/files/watchman.tar.gz -o /tmp/watchman.tar.gz \
-	&& tar zxvf /tmp/watchman.tar.gz -C /usr/bin/ \
-	&& rm /tmp/watchman.tar.gz \
-	&& chmod +x /usr/bin/watchman \
-	&& mkdir -p /usr/local/var/run/watchman/ \
-	&& yum install -y ruby \
+RUN dnf install -y watchman ruby rubygem-webrick https://github.com/joewalnes/websocketd/releases/download/v0.4.1/websocketd.0.4.1.x86_64.rpm \
 	&& gem install asciidoctor-revealjs \
 	&& mkdir -p /opt/slides/src \
-	&& yum install -y https://github.com/joewalnes/websocketd/releases/download/v0.3.0/websocketd.0.3.0.x86_64.rpm \
-	&& yum clean all \
-	&& rm -rf /var/cache/yum
+	&& dnf clean all && rm -rf /var/cache/yum
 
 COPY server/ /opt/slides/
 EXPOSE ${SLIDES_PORT}/tcp
